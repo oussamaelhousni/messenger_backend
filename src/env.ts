@@ -4,8 +4,12 @@ import dotenv from "dotenv";
 import { formatZodError } from "./utils/formatZodError";
 import chalk from "chalk";
 const envSchema = z.object({
-  DB_URL: z.string().length(2),
+  DB_URL: z.string().min(2),
   PORT: z.coerce.number(),
+  EMAIL_USER: z.string(),
+  EMAIL_PASS: z.string(),
+  JWT_SECRET: z.string().default("default_access_secret_key_123456"),
+  JWT_REFRESH_SECRET: z.string().default("default_refresh_secret_key_123456"),
 });
 
 const rootDir = path.resolve(process.cwd());
