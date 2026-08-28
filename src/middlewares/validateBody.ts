@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import type { ZodType, ZodIssue } from "zod";
+import type { ZodIssue, ZodTypeAny } from "zod";
 import { t } from "../i18n";
 
 const formatIssueMessage = (issue: ZodIssue, req: Request): string => {
@@ -12,8 +12,7 @@ const formatIssueMessage = (issue: ZodIssue, req: Request): string => {
   }
 
   // Handle common Zod default codes if not already translated
-  const issueAny = issue as any;
-  if (issueAny.code === "invalid_type" && issueAny.received === "undefined") {
+  if (issue.code === "invalid_type" && issue.input === undefined) {
     const fieldName = issue.path[issue.path.length - 1];
     const specificKey = `${String(fieldName).toUpperCase()}_REQUIRED`;
     const specificTranslated = t(specificKey, language);
@@ -23,14 +22,14 @@ const formatIssueMessage = (issue: ZodIssue, req: Request): string => {
     return t("FIELD_REQUIRED", language);
   }
 
-  if (issueAny.code === "invalid_format" && issueAny.format === "email") {
+  if (issue.code === "invalid_format" && issue.format === "email") {
     return t("INVALID_EMAIL", language);
   }
 
   return issue.message;
 };
 
-export const validateBody = (schema: ZodType) => {
+export const validateBody = (schema: ZodTypeAny) => {
   return (req: Request, res: Response, next: NextFunction) => {
     const result = schema.safeParse(req.body);
 

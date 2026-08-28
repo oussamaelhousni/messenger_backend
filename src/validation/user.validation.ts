@@ -3,35 +3,29 @@ import { z } from "zod";
 export const registerSchema = z.object({
   fullName: z
     .string()
-    .min(2, "NAME_MIN_LENGTH")
-    .max(50, "NAME_MAX_LENGTH"),
+    .min(2, { error: "NAME_MIN_LENGTH" })
+    .max(50, { error: "NAME_MAX_LENGTH" }),
 
-  email: z
-    .string()
-    .email("INVALID_EMAIL")
-    .toLowerCase(),
+  email: z.email({ error: "INVALID_EMAIL" }).toLowerCase(),
 
   password: z
     .string()
-    .min(8, "PASSWORD_MIN_LENGTH")
-    .max(72, "PASSWORD_MAX_LENGTH"),
+    .min(8, { error: "PASSWORD_MIN_LENGTH" })
+    .max(72, { error: "PASSWORD_MAX_LENGTH" }),
 });
 
 export const loginSchema = z.object({
-  email: z
-    .string()
-    .email("INVALID_EMAIL")
-    .toLowerCase(),
+  email: z.email({ error: "INVALID_EMAIL" }).toLowerCase(),
 
   password: z
     .string()
-    .min(1, "PASSWORD_REQUIRED"),
+    .min(1, { error: "PASSWORD_REQUIRED" }),
 });
 
 export const refreshTokenSchema = z.object({
   refreshToken: z
     .string()
-    .min(1, "REFRESH_TOKEN_REQUIRED"),
+    .min(1, { error: "REFRESH_TOKEN_REQUIRED" }),
 });
 
 export type RegisterInput = z.infer<typeof registerSchema>;

@@ -14,6 +14,7 @@ export const en = {
   LOGIN_SUCCESS: "Login successful",
   TOKEN_REFRESHED_SUCCESS: "Token refreshed successfully",
   FIELD_REQUIRED: "This field is required",
+  RATE_LIMIT_EXCEEDED: "Too many requests. Please try again later.",
 
   // Validation keys
   FULL_NAME_REQUIRED: "Full name is required",

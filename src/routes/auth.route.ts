@@ -6,8 +6,11 @@ import {
   registerSchema,
 } from "../validation/user.validation";
 import { validateBody } from "../middlewares/validateBody";
+import { authRateLimiter } from "../middlewares/rateLimit";
 
 const router = Router();
+
+router.use(authRateLimiter);
 
 router.post("/register", validateBody(registerSchema), register);
 router.post("/login", validateBody(loginSchema), login);

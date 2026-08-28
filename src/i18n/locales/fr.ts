@@ -16,6 +16,7 @@ export const fr: Record<TranslationKey, string> = {
   LOGIN_SUCCESS: "Connexion réussie",
   TOKEN_REFRESHED_SUCCESS: "Jeton rafraîchi avec succès",
   FIELD_REQUIRED: "Ce champ est requis",
+  RATE_LIMIT_EXCEEDED: "Trop de requêtes. Veuillez réessayer plus tard.",
 
   // Validation keys
   FULL_NAME_REQUIRED: "Le nom complet est requis",

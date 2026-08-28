@@ -16,6 +16,7 @@ export const ar: Record<TranslationKey, string> = {
   LOGIN_SUCCESS: "تم تسجيل الدخول بنجاح",
   TOKEN_REFRESHED_SUCCESS: "تم تحديث الرمز بنجاح",
   FIELD_REQUIRED: "هذا الحقل مطلوب",
+  RATE_LIMIT_EXCEEDED: "طلبات كثيرة جدًا. يرجى المحاولة لاحقًا.",
 
   // Validation keys
   FULL_NAME_REQUIRED: "الاسم الكامل مطلوب",
