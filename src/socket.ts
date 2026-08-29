@@ -1,5 +1,7 @@
 import type { Server as HttpServer } from "http";
 import { Server as SocketIOServer } from "socket.io";
+import { socketAuth } from "./middlewares/socketAuth";
+import { registerSocketEvents } from "./socket/events";
 
 export class WebSocketServer {
   private static instance?: SocketIOServer;
@@ -15,6 +17,8 @@ export class WebSocketServer {
       }
 
       WebSocketServer.instance = new SocketIOServer(server);
+      WebSocketServer.instance.use(socketAuth);
+      registerSocketEvents(WebSocketServer.instance);
     }
 
     return WebSocketServer.instance;

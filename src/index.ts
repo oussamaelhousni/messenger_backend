@@ -6,6 +6,8 @@ import { WebSocketServer } from "./socket";
 
 export const server = http.createServer(app);
 
+WebSocketServer.getInstance(server);
+
 server.listen(env.PORT, () => {
   console.log(chalk.green(`Server started at PORT:${env.PORT}`));
 });
