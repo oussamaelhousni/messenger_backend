@@ -5,7 +5,7 @@ export const users = pgTable("user", {
   fullName: varchar("fullName", { length: 50 }).notNull(),
   email: varchar("email", { length: 255 }).notNull().unique(),
   password: varchar("password", { length: 255 }).notNull(),
-  avatar: varchar("avatar", { length: 50 }),
+  avatar: varchar("avatar", { length: 500 }),
   failedLoginAttempts: integer("failedLoginAttempts").notNull().default(0),
   lockedUntil: timestamp("lockedUntil"),
   createdAt: timestamp().defaultNow(),
