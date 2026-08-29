@@ -1,13 +1,14 @@
 import type { Server as SocketIOServer, Socket } from "socket.io";
 import type { TokenPayload } from "../utils/jwt";
 
-export const getUserSockets = (
-  io: SocketIOServer,
-  userId: number,
-): Socket[] => {
-  return Array.from(io.sockets.sockets.values()).filter((socket) => {
+export const getSockets = (io: SocketIOServer): Socket[] => {
+  return Array.from(io.sockets.sockets.values());
+};
+
+export const getUserSockets = (io: SocketIOServer, userId: number): Socket[] => {
+  return getSockets(io).filter((socket) => {
     const user = socket.data.user as TokenPayload | undefined;
-    return user?.userId == userId;
+    return user?.userId === userId;
   });
 };
 
